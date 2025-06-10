@@ -1,0 +1,155 @@
+[versions]
+accompanistPermissions = "0.32.0"
+activityComposeVersion = "1.8.2"
+agp = "8.7.2"
+androidxCoreKtx = "1.12.0"
+androidxPaletteVersion = "1.0.0"
+cloudy = "0.1.2"
+cloudyVersion = "0.2.7"
+coreKtxVersion = "1.10.1"
+devCloudy = "1.0.0"
+insertKoinKoinAndroid = "3.4.0"
+insertKoinKoinAndroidVersion = "3.5.6"
+insertKoinKoinAndroidxCompose = "3.5.6"
+ioKtorKtorClientContentNegotiation = "2.3.0"
+ioKtorKtorClientContentNegotiation2 = "2.3.11"
+ioKtorKtorClientCore = "2.3.11"
+ioKtorKtorSerializationKotlinxJson = "2.3.0"
+ioKtorKtorSerializationKotlinxJson2 = "2.3.11"
+jetbrainsKotlinxSerializationJson = "1.6.2"
+koinAndroid = "3.5.3"
+koinAndroidVersion = "3.4.3"
+koinAndroidxCompose = "3.4.0"
+koinAndroidxComposeVersion = "3.5.3"
+koinCore = "3.5.3"
+kotlin = "2.0.0"
+coreKtx = "1.16.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+kotlinxCoroutinesAndroid = "1.10.2"
+kotlinxCoroutinesAndroidVersion = "1.7.3"
+kotlinxCoroutinesPlayServices = "1.7.3"
+kotlinxSerializationJson = "1.8.1"
+kotlinxSerializationJsonVersion = "1.5.1"
+ktorClientAndroid = "2.3.8"
+ktorClientAndroidVersion = "2.3.0"
+ktorClientCio = "2.3.2"
+ktorClientCioVersion = "2.3.7"
+ktorClientContentNegotiation = "3.1.3"
+ktorClientContentNegotiationVersion = "2.3.2"
+ktorClientCore = "3.1.3"
+ktorClientCoreVersion = "2.3.7"
+ktorClientLogging = "3.1.3"
+ktorClientLoggingVersion = "2.3.0"
+ktorKtorClientAndroid = "2.3.7"
+ktorKtorClientAndroidVersion = "2.3.11"
+ktorKtorClientCio = "2.3.5"
+ktorKtorClientContentNegotiation = "2.3.7"
+ktorKtorClientContentNegotiationVersion = "2.3.5"
+ktorKtorClientCore = "2.3.5"
+ktorKtorClientCoreVersion = "2.3.0"
+ktorKtorClientLogging = "2.3.7"
+ktorKtorSerializationKotlinxJson = "2.3.7"
+ktorKtorSerializationKotlinxJsonVersion = "2.3.5"
+ktorSerializationKotlinxJson = "3.1.3"
+ktorSerializationKotlinxJsonVersion = "2.3.2"
+ktorServerCore = "3.1.3"
+ktorServerNetty = "3.1.3"
+lifecycleRuntimeKtx = "2.9.1"
+activityCompose = "1.10.1"
+composeBom = "2024.04.01"
+firebaseCrashlyticsBuildtools = "3.0.4"
+lifecycleRuntimeKtxVersion = "2.7.0"
+lifecycleViewmodelKtx = "2.6.2"
+material3 = "1.3.2"
+playServicesLocation = "21.3.0"
+playServicesLocationVersion = "21.0.1"
+runtimeLivedata = "1.8.2"
+ui = "1.8.2"
+uiToolingPreview = "1.8.2"
+
+[libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+androidx-activity-compose-v182 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-ktx-v1101 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
+androidx-core-ktx-v1120 = { module = "androidx.core:core-ktx", version.ref = "androidxCoreKtx" }
+androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-ktx-v270 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtxVersion" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-viewmodel-ktx-v262 = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-palette-palette = { module = "androidx.palette:palette", version.ref = "androidxPaletteVersion" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
+cloudy = { module = "com.github.skydoves:cloudy", version.ref = "cloudy" }
+dev-cloudy = { module = "dev.chrisbanes.cloudy:cloudy", version.ref = "devCloudy" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
+koin-android-v340 = { module = "io.insert-koin:koin-android", version.ref = "insertKoinKoinAndroid" }
+koin-android-v343 = { module = "io.insert-koin:koin-android", version.ref = "koinAndroidVersion" }
+koin-android-v356 = { module = "io.insert-koin:koin-android", version.ref = "insertKoinKoinAndroidVersion" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+koin-androidx-compose-v353 = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxComposeVersion" }
+koin-androidx-compose-v356 = { module = "io.insert-koin:koin-androidx-compose", version.ref = "insertKoinKoinAndroidxCompose" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-android-v173 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-serialization-json-v151 = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJsonVersion" }
+kotlinx-serialization-json-v162 = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "jetbrainsKotlinxSerializationJson" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
+ktor-client-android-v230 = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroidVersion" }
+ktor-client-android-v2311 = { module = "io.ktor:ktor-client-android", version.ref = "ktorKtorClientAndroidVersion" }
+ktor-client-android-v237 = { module = "io.ktor:ktor-client-android", version.ref = "ktorKtorClientAndroid" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-cio-v235 = { module = "io.ktor:ktor-client-cio", version.ref = "ktorKtorClientCio" }
+ktor-client-cio-v237 = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCioVersion" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
+ktor-client-content-negotiation-v230 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ioKtorKtorClientContentNegotiation" }
+ktor-client-content-negotiation-v2311 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ioKtorKtorClientContentNegotiation2" }
+ktor-client-content-negotiation-v232 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiationVersion" }
+ktor-client-content-negotiation-v235 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorKtorClientContentNegotiationVersion" }
+ktor-client-content-negotiation-v237 = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorKtorClientContentNegotiation" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-core-v230 = { module = "io.ktor:ktor-client-core", version.ref = "ktorKtorClientCoreVersion" }
+ktor-client-core-v2311 = { module = "io.ktor:ktor-client-core", version.ref = "ioKtorKtorClientCore" }
+ktor-client-core-v235 = { module = "io.ktor:ktor-client-core", version.ref = "ktorKtorClientCore" }
+ktor-client-core-v237 = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCoreVersion" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
+ktor-client-logging-v230 = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLoggingVersion" }
+ktor-client-logging-v237 = { module = "io.ktor:ktor-client-logging", version.ref = "ktorKtorClientLogging" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+ktor-serialization-kotlinx-json-v230 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ioKtorKtorSerializationKotlinxJson" }
+ktor-serialization-kotlinx-json-v2311 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ioKtorKtorSerializationKotlinxJson2" }
+ktor-serialization-kotlinx-json-v232 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJsonVersion" }
+ktor-serialization-kotlinx-json-v235 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorKtorSerializationKotlinxJsonVersion" }
+ktor-serialization-kotlinx-json-v237 = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorKtorSerializationKotlinxJson" }
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktorServerCore" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktorServerNetty" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+matteobattilana-cloudy = { module = "com.github.MatteoBattilana:cloudy", version.ref = "cloudyVersion" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+play-services-location-v2101 = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
+ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "1.9.24" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
