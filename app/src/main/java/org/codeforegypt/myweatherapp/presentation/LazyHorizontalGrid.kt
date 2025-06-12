@@ -90,11 +90,11 @@ fun LazyHorizontalGridItem(viewModel: WeatherViewModel) {
                         .fillMaxWidth()
                         .padding(bottom = 40.dp)
                         .height(130.dp)
-                        .padding(horizontal = 12.dp)
+                        .padding(start = 12.dp)
                         .clip(RoundedCornerShape(20.dp)),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.Center,
-                    contentPadding = PaddingValues(horizontal = 8.dp)
+                    contentPadding = PaddingValues(start = 8.dp)
                 ) {
                     items(items) { item ->
                         TodayGridItemView(item, viewModel)
