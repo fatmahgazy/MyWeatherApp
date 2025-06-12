@@ -1,6 +1,7 @@
 package org.codeforegypt.myweatherapp.data.model
 
 import kotlinx.serialization.Serializable
+import org.codeforegypt.myweatherapp.domain.model.WeatherInfo
 
 @Serializable
 data class Weather(
@@ -84,8 +85,3 @@ data class HourlyUnits(
 )
 
 
-data class WeatherState(
-    val weather: Weather? = null,
-    val isLoading: Boolean = false,
-    val errorMessage: String? = null
-)

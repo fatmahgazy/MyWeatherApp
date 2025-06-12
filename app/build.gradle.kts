@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -85,5 +87,9 @@ dependencies {
     implementation(libs.accompanist.permissions)
 
     implementation(libs.kotlinx.coroutines.play.services)
+
+    implementation (libs.androidx.animation)
+    implementation (libs.androidx.material)
+    implementation (libs.androidx.ui.v160)
 
     }

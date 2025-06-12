@@ -1,61 +1,49 @@
-//package org.codeforegypt.myweatherapp.data.dto.mapper
-//
-//
-//import org.codeforegypt.myweatherapp.data.model.Current
-//import org.codeforegypt.myweatherapp.data.model.Daily
-//import org.codeforegypt.myweatherapp.data.model.Hourly
-//import org.codeforegypt.myweatherapp.data.model.Weather
-//import org.codeforegypt.myweatherapp.data.model.CurrentWeather
-//import org.codeforegypt.myweatherapp.data.model.DailyWeather
-//import org.codeforegypt.myweatherapp.data.model.HourlyWeather
-//import org.codeforegypt.myweatherapp.data.model.WeatherResponse
-//
-//fun Weather.toModel(): WeatherResponse {
-//    return WeatherResponse(
-//        latitude = latitude,
-//        longitude = longitude,
-//        current = current.toModel(),
-//        hourly = hourly.toModel(),
-//        daily = daily.toModel()
-//    )
-//}
-//
-//fun Current.toModel(): CurrentWeather {
-//    return CurrentWeather(
-//        time = time,
-//        temperature_2m = temperature_2m,
-//        wind_speed_10m = wind_speed_10m,
-//        relative_humidity_2m = relative_humidity_2m,
-//        weather_code = weather_code,
-//        apparent_temperature = apparent_temperature,
-//        pressure_msl = pressure_msl,
-//        is_day = is_day,
-//        precipitation_probability = precipitation_probability,
-//        uv_index = uv_index
-//    )
-//}
-//
-//fun Hourly.toModel(): HourlyWeather {
-//    return HourlyWeather(
-//        time = time,
-//        temperature_2m = temperature_2m,
-//        weather_code = weather_code,
-//        precipitation_probability = precipitation_probability
-//    )
-//}
-//
-//fun Daily.toModel(): DailyWeather {
-//    return DailyWeather(
-//        time = time,
-//        temperature_2m_max = temperature_2m_max,
-//        temperature_2m_min = temperature_2m_min,
-//        weather_code = weather_code,
-//        precipitation_probability_max = precipitation_probability_max
-//    )
-//}
-//
-//data class WeatherState(
-//    val weather: Weather? = null,
-//    val isLoading: Boolean = false,
-//    val errorMessage: String? = null
-//)
+package org.codeforegypt.myweatherapp.data.dto.mapper
+
+import org.codeforegypt.myweatherapp.data.model.Weather
+import org.codeforegypt.myweatherapp.domain.model.CurrentWeather
+import org.codeforegypt.myweatherapp.domain.model.DailyWeather
+import org.codeforegypt.myweatherapp.domain.model.HourlyWeather
+import org.codeforegypt.myweatherapp.domain.model.WeatherInfo
+import org.codeforegypt.myweatherapp.presentation.utils.WeatherCodeUtils
+
+fun Weather.toWeatherInfo(): WeatherInfo {
+    val isDay = current.is_day == 1
+
+    val current = CurrentWeather(
+        description = WeatherCodeUtils.getWeatherDescription(current.weather_code, isDay),
+        temperature = current.temperature_2m,
+        feelsLike = current.apparent_temperature,
+        windSpeed = current.wind_speed_10m,
+        humidity = current.relative_humidity_2m,
+        rainChance = current.precipitation_probability,
+        uvIndex = current.uv_index,
+        pressure = current.pressure_msl,
+        weatherCode = current.weather_code,
+        isDay = isDay
+    )
+
+    val hourlyForecast = hourly.time.mapIndexed { index, time ->
+        HourlyWeather(
+            time = time,
+            temperature = hourly.temperature_2m.getOrNull(index) ?: 0.0,
+                weatherCode = hourly.weather_code.getOrNull(index) ?: 0
+            )
+        }
+
+
+    val dailyForecast = daily.time.mapIndexed { index, date ->
+        DailyWeather(
+            date = date,
+            maxTemp = daily.temperature_2m_max.getOrNull(index) ?: 0.0,
+            minTemp = daily.temperature_2m_min.getOrNull(index) ?: 0.0,
+            weatherCode = daily.weather_code.getOrNull(index) ?: 0
+        )
+    }
+
+    return WeatherInfo(
+        currentWeather = current,
+        hourlyForecast = hourlyForecast,
+        dailyForecast = dailyForecast
+    )
+}

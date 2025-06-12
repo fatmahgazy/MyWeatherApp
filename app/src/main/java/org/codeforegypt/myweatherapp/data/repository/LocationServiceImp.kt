@@ -1,100 +1,89 @@
 package org.codeforegypt.myweatherapp.data.repository
 
+
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
 import android.os.Looper
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import kotlinx.coroutines.CancellableContinuation
+import com.google.android.gms.location.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import org.codeforegypt.myweatherapp.domain.repository.LocationService
+import java.util.Locale
 import kotlin.coroutines.resume
-
 
 class LocationServiceImpl(private val context: Context) : LocationService {
 
+    private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+
     @SuppressLint("MissingPermission")
-    override suspend fun getCurrentLocation(): Result<Pair<Double, Double>> {
-        return try {
-            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+    override suspend fun getCurrentLocation(): Location? {
+        val hasFineLocationPermission = ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+        ) == android.content.pm.PackageManager.PERMISSION_GRANTED
 
-            // Check permissions using explicit Manifest.permission constants
-            val hasFineLocationPermission = ContextCompat.checkSelfPermission(
-                context,
-                "android.permission.ACCESS_FINE_LOCATION"
-            ) == PackageManager.PERMISSION_GRANTED
+        val hasCoarseLocationPermission = ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == android.content.pm.PackageManager.PERMISSION_GRANTED
 
-            val hasCoarseLocationPermission = ContextCompat.checkSelfPermission(
-                context,
-                "android.permission.ACCESS_COARSE_LOCATION"
-            ) == PackageManager.PERMISSION_GRANTED
+        if (!hasFineLocationPermission && !hasCoarseLocationPermission) {
+            return null
+        }
 
-            if (!hasFineLocationPermission && !hasCoarseLocationPermission) {
-                return Result.failure(Exception("Location permissions not granted"))
-            }
-
-            // Get current location using suspendCancellableCoroutine
-            suspendCancellableCoroutine { continuation ->
-                // Try last known location first
-                fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location ->
-                        if (location != null && continuation.isActive) {
-                            continuation.resume(Result.success(Pair(location.latitude, location.longitude)))
-                        } else {
-                            // Request new location
-                            requestNewLocation(fusedLocationClient, continuation)
-                        }
+        return suspendCancellableCoroutine { continuation ->
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        continuation.resume(location)
+                    } else {
+                        requestNewLocation(continuation)
                     }
-                    .addOnFailureListener { exception ->
-                        if (continuation.isActive) {
-                            continuation.resume(Result.failure(exception))
-                        }
-                    }
-            }
-
-        } catch (e: Exception) {
-            Result.failure(e)
+                }
+                .addOnFailureListener { e ->
+                    continuation.resume(null)
+                }
         }
     }
 
+    override suspend fun getCityName(location: Location?): String? = withContext(Dispatchers.IO) {
+        return@withContext try {
+            val geocoder = Geocoder(context, Locale.getDefault())
+            val addressList =
+                location?.let { geocoder.getFromLocation(it.latitude, location.longitude, 1) }
+            addressList?.firstOrNull()?.locality
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+
     @SuppressLint("MissingPermission")
     private fun requestNewLocation(
-        fusedLocationClient: FusedLocationProviderClient,
-        continuation: CancellableContinuation<Result<Pair<Double, Double>>>
+        continuation: kotlin.coroutines.Continuation<Location?>
     ) {
         val locationRequest = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY,
-            10000
-        ).setWaitForAccurateLocation(false)
-            .setMinUpdateIntervalMillis(5000)
-            .setMaxUpdateDelayMillis(15000)
+            Priority.PRIORITY_HIGH_ACCURACY, 10000L
+        )
+            .setWaitForAccurateLocation(false)
+            .setMinUpdateIntervalMillis(5000L)
+            .setMaxUpdateDelayMillis(15000L)
             .build()
-
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(result: LocationResult) {
-                val location = result.lastLocation
-                if (location != null && continuation.isActive) {
-                    fusedLocationClient.removeLocationUpdates(this)
-                    continuation.resume(Result.success(Pair(location.latitude, location.longitude)))
-                }
-            }
-        }
 
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
-            locationCallback,
+            object : LocationCallback() {
+                override fun onLocationResult(result: LocationResult) {
+                    super.onLocationResult(result)
+                    fusedLocationClient.removeLocationUpdates(this)
+                    continuation.resume(result.lastLocation)
+                }
+            },
             Looper.getMainLooper()
         )
-
-        // Handle cancellation
-        continuation.invokeOnCancellation {
-            fusedLocationClient.removeLocationUpdates(locationCallback)
-        }
     }
 }
